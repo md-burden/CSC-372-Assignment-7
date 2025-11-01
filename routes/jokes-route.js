@@ -7,7 +7,7 @@
 "use strict";
 const express = require("express");
 const router = express.Router();
-const controller = require("../controllers/jokeController.js");
+const controller = require("../controllers/joke-controller.js");
 
 router.get("/categories", controller.fetchJokeCategories);
 router.get("/category/:category", controller.fetchJokesByCategory);

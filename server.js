@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-const jokeRoutes = require('./routes/jokesRoute.js');
+const jokeRoutes = require('./routes/jokes-route.js');
 
 
 app.use('/jokebook', jokeRoutes);
