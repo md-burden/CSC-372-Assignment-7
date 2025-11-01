@@ -151,7 +151,6 @@ async function displayJokes(jokes, jokeType) {
         const jokeCard = document.createElement('div');
         jokeCard.className = 'category-joke';
 
-        // Create joke content
         const jokeContent = document.createElement('div');
         jokeContent.className = 'joke-content';
 
@@ -269,18 +268,16 @@ async function submitJokeForm(event) {
         joke_type: category
     }
 
-    const addedJoke = await addJoke(joke);
+    const jokes = await addJoke(joke);
+    console.log(jokes);
 
-    console.log(addedJoke.joke.joke_type);
-
-    if(addedJoke.joke.joke_type) {
+    if(jokes && jokes.jokes) {
         showCustomAlert("Joke submitted successfully! Yippee!");
 
         let jokeForm = document.getElementById("joke-form");
         if (jokeForm) {
             jokeForm.remove();
-            const jokes = await getJokesByCategory(addedJoke.joke.joke_type);
-            displayJokes(jokes, addedJoke.joke.joke_type);
+            displayJokes(jokes, jokes.jokes[0].joke_type);
         }
         
     }

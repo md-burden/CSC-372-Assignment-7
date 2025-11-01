@@ -58,7 +58,7 @@ async function addJoke(req, res) {
             return res.status(400).json({ error: "Joke type must be either 'funny' or 'lame'" });
         }
         const newJoke = await model.addJoke(setup, delivery, joke_type);
-        res.status(201).json({ joke: newJoke });
+        res.status(201).json({ jokes: newJoke });
     }
     catch (error) {
         console.error("Error adding new joke:", error);
