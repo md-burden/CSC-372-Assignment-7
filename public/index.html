@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokebook - The Best Jokes on the Web!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>Jokebook</h1>
+        <div class="marquee">
+            <span>Welcome to the funniest page on the internet!</span>
+        </div>
+    </header>
+
+    <div class="ugly-container">
+        <h3>Find Your Favorite Jokes!</h3>
+        <div class="search-bar">
+            <input type="text" id="search-input" class="ugly-input" placeholder="Search for jokes by category..." />
+            <button id="search-button">SEARCH!</button>
+        </div>
+        <div class="action-buttons">
+            <button id="categories-button" class="action-btn">Categories</button>
+            <button id="random-button" class="action-btn">Random</button>
+            <button id="create-joke-button"class="action-btn">Create a Joke!</button>
+        </div>
+        <div id="category-buttons-container" class="category-buttons"></div>
+    </div>
+
+    <div class="ugly-container">
+        <h2 class="joke-title">Random Joke of the Day!</h2>
+        <div id="joke-of-the-day" class="joke-content">
+            <p id="jotd-setup" class="joke-setup"></p>
+            <p id="jotd-delivery" class="joke-delivery"></p>
+        </div>
+        <div id="jotd-footer" class="joke-footer">
+            <span class="joke-category"></span>
+            <span class="joke-id"></span>
+        </div>
+    </div>
+</body>
+
+</html>
