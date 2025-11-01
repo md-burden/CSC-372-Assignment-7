@@ -1,4 +1,9 @@
-//server.js
+// Name: Matthew Burden
+// Date: 11/01/2025
+// CSC 372-01
+
+// This is the main server file that sets up the Express application.
+
 "use strict";
 const express = require("express");
 const app = express();

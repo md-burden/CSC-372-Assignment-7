@@ -1,6 +1,17 @@
-"use strict";
-const model = require("../models/jokeModel.js");
+// Name: Matthew Burden
+// Date: 11/01/2025
+// CSC 372-01
 
+// This is the joke controller that handles requests related to jokes.
+
+"use strict";
+const model = require("../models/joke-model.js");
+
+/**
+ * Fetches joke categories.
+ * @param {*} req 
+ * @param {*} res 
+ */
 async function fetchJokeCategories(req, res) {
     try {
         const categories = await model.getCategories();
@@ -12,6 +23,12 @@ async function fetchJokeCategories(req, res) {
     }
 }
 
+/**
+ * Fetches jokes by category.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 async function fetchJokesByCategory(req, res) {
     try {
         const category = req.params.category;
@@ -30,6 +47,11 @@ async function fetchJokesByCategory(req, res) {
     }
 }
 
+/**
+ * Fetches a random joke.
+ * @param {*} req 
+ * @param {*} res 
+ */
 async function fetchRandomJoke(req, res) {
     try {
         const joke = await model.getRandomJoke();
@@ -41,6 +63,12 @@ async function fetchRandomJoke(req, res) {
     }
 }
 
+/**
+ * Adds a new joke.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 async function addJoke(req, res) {
     try {
         const { setup, delivery, joke_type } = req.body;

@@ -1,5 +1,13 @@
+// Name: Matthew Burden
+// Date: 11/01/2025
+// CSC 372-01
+
+// This is the main JavaScript file for the Jokebook web application. It handles fetching jokes,
+// displaying them, and managing user interactions such as searching for jokes by category,
+// getting a random joke, and submitting new jokes.
+
 const BASEURL = "/jokebook";
- const searchBar = document.getElementById("search-input");
+const searchBar = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
 const categoriesButton = document.getElementById("categories-button");
 const randomButton = document.getElementById("random-button");
@@ -7,6 +15,10 @@ const createJokeButton = document.getElementById("create-joke-button");
 const jokeOfTheDay = document.getElementById("joke-of-the-day");
 const jokeOfTheDayFooter = document.getElementById("jotd-footer");
 
+/**
+ * Initializes the application by fetching and displaying the joke of the day,
+ * setting up event listeners for buttons.
+ */
 document.addEventListener('DOMContentLoaded', async () => {
     const randomJoke = await getRandomJoke();
     displayJokeOfTheDay(randomJoke, jokeOfTheDay, jokeOfTheDayFooter);
@@ -29,6 +41,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 
+/**
+ * Fetches a random joke from the server.
+ * @returns A promise that resolves to the random joke.
+ */
 async function getRandomJoke() {
     try {
         return await fetch(`${BASEURL}/random`).then(async (response) => {
@@ -41,6 +57,10 @@ async function getRandomJoke() {
     }
 }
 
+/**
+ * Fetches joke categories from the server.
+ * @returns A promise that resolves to the joke categories.
+ */
 async function getJokeGategories() {
     try {
         return await fetch(`${BASEURL}/categories`).then(async (response) => {
@@ -54,6 +74,12 @@ async function getJokeGategories() {
     }
 }
 
+/**
+ * Fetches jokes by category from the server.
+ * @param {*} category Category of jokes to fetch.
+ * @param {*} limit Amount of jokes to fetch.
+ * @returns A promise that resolves to the jokes in the specified category.
+ */
 async function getJokesByCategory(category, limit = 10) {
     if (category.trim() === "") {
         return [];
@@ -71,6 +97,11 @@ async function getJokesByCategory(category, limit = 10) {
     }
 }
 
+/**
+ * Adds a new joke to the server.
+ * @param {*} joke Joke to add.
+ * @returns A promise that resolves to all the jokes in the category of the newly added joke.
+ */
 async function addJoke(joke) {
     try {
         return await fetch(`${BASEURL}/joke/add`, {
@@ -90,6 +121,12 @@ async function addJoke(joke) {
     }
 }
 
+/**
+ * Displays the joke of the day.
+ * @param {*} joke Joke to display.
+ * @param {*} jokeOfTheDay Joke of the day container.
+ * @param {*} jokeOfTheDayFooter 
+ */
 function displayJokeOfTheDay(joke, jokeOfTheDay, jokeOfTheDayFooter) {
     const setup = jokeOfTheDay.querySelector("#jotd-setup");
     const delivery = jokeOfTheDay.querySelector("#jotd-delivery");
@@ -102,6 +139,10 @@ function displayJokeOfTheDay(joke, jokeOfTheDay, jokeOfTheDayFooter) {
     id.textContent = `ID: #${joke.joke[0].id}`;
 }
 
+/**
+ * Displays joke categories.
+ * @returns A promise that resolves to the joke categories buttons.
+ */
 async function displayJokeCategories() {
     const categoryButtonsContainer = document.getElementById("category-buttons-container");
 
@@ -128,6 +169,11 @@ async function displayJokeCategories() {
     categoryButtonsContainer.classList.add('show');
 }
 
+/**
+ * Displays jokes in a container.
+ * @param {*} jokes Jokes to display.
+ * @param {*} jokeType Type of jokes.
+ */
 async function displayJokes(jokes, jokeType) {
     let jokesContainer = document.getElementById("jokes-container");
     let jokeForm = document.getElementById("joke-form");
@@ -191,6 +237,9 @@ async function displayJokes(jokes, jokeType) {
     }, 100);
 }
 
+/**
+ * Builds and displays the joke submission form.
+ */
 function buildJokeForm() {
     let jokesContainer = document.getElementById("jokes-container");
 
@@ -229,6 +278,12 @@ function buildJokeForm() {
     }, 100);
 }
 
+/**
+ * Builds form input with label.
+ * @param {*} form Form element to append the input to.
+ * @param {*} labelText Label for the input.
+ * @param {*} inputName Name of the input.
+ */
 function buildFormInputWithLabel(form, labelText, inputName) {
     const label = document.createElement("label");
     label.textContent = labelText;
@@ -245,6 +300,11 @@ function buildFormInputWithLabel(form, labelText, inputName) {
     form.appendChild(input);
 }
 
+/**
+ * Submits the joke form.
+ * @param {*} event Event object.
+ * @returns 
+ */
 async function submitJokeForm(event) {
     event.preventDefault();
     
@@ -283,6 +343,11 @@ async function submitJokeForm(event) {
     }
 }
 
+/**
+ * Builds a header for joke cards with a close button. This is for both the joke of the day and category jokes.
+ * @param {*} div Container div to append the header to.
+ * @param {*} headerTitle Title of the header.
+ */
 function buildCardHeader(div, headerTitle) {
     const headerContainer = document.createElement('div');
     headerContainer.className = 'jokes-header-container';
@@ -306,6 +371,10 @@ function buildCardHeader(div, headerTitle) {
     div.appendChild(headerContainer);
 }
 
+/**
+ * Displays a custom alert message.
+ * @param {*} message Message to display.
+ */
 function showCustomAlert(message) {
     const overlay = document.createElement('div');
     overlay.className = 'custom-alert-overlay';
