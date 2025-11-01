@@ -1,15 +1,13 @@
 const BASEURL = "/jokebook";
+ const searchBar = document.getElementById("search-input");
+const searchButton = document.getElementById("search-button");
+const categoriesButton = document.getElementById("categories-button");
+const randomButton = document.getElementById("random-button");
+const createJokeButton = document.getElementById("create-joke-button");
+const jokeOfTheDay = document.getElementById("joke-of-the-day");
+const jokeOfTheDayFooter = document.getElementById("jotd-footer");
 
-// Wait for DOM and stylesheets to fully load
 document.addEventListener('DOMContentLoaded', async () => {
-    const searchBar = document.getElementById("search-input");
-    const searchButton = document.getElementById("search-button");
-    const categoriesButton = document.getElementById("categories-button");
-    const randomButton = document.getElementById("random-button");
-    const createJokeButton = document.getElementById("create-joke-button");
-    const jokeOfTheDay = document.getElementById("joke-of-the-day");
-    const jokeOfTheDayFooter = document.getElementById("jotd-footer");
-
     const randomJoke = await getRandomJoke();
     displayJokeOfTheDay(randomJoke, jokeOfTheDay, jokeOfTheDayFooter);
 
@@ -39,6 +37,7 @@ async function getRandomJoke() {
         });
     } catch (error) {
         console.error("Error fetching random joke:", error);
+        showCustomAlert("Error fetching random joke. Please try again later.");
     }
 }
 
@@ -50,6 +49,7 @@ async function getJokeGategories() {
         });
     } catch (error) {
         console.error("Error fetching joke categories:", error);
+        showCustomAlert("Error fetching joke categories. Please try again later.");
         return [];
     }
 }
@@ -66,6 +66,7 @@ async function getJokesByCategory(category, limit = 10) {
         });
     } catch (error) {
         console.error(`Error fetching jokes for category ${category}:`, error);
+        showCustomAlert("Error fetching jokes. Please try again later.");
         return [];
     }
 }
@@ -84,6 +85,7 @@ async function addJoke(joke) {
         });
     } catch (error) {
         console.error(`Error fetching jokes for category ${category}:`, error);
+        showCustomAlert("Error submitting joke. Please try again later.");
         return [];
     }
 }
@@ -272,7 +274,7 @@ async function submitJokeForm(event) {
     console.log(addedJoke.joke.joke_type);
 
     if(addedJoke.joke.joke_type) {
-        alert("Joke submitted successfully!");
+        showCustomAlert("Joke submitted successfully! Yippee!");
 
         let jokeForm = document.getElementById("joke-form");
         if (jokeForm) {
@@ -308,11 +310,9 @@ function buildCardHeader(div, headerTitle) {
 }
 
 function showCustomAlert(message) {
-    // Create overlay
     const overlay = document.createElement('div');
     overlay.className = 'custom-alert-overlay';
     
-    // Create alert box
     const alertBox = document.createElement('div');
     alertBox.className = 'custom-alert';
     
